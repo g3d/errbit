@@ -61,10 +61,16 @@ div#content-wrapper {
 
 }
 
-#action-bar span.github a:before { 
-  font-family: FontAwesome; 
-  content: "\f09b"; 
-  margin-right: .5em; 
+#action-bar span.github a:before {
+  font-family: FontAwesome;
+  content: "\f09b";
+  margin-right: .5em;
+}
+
+#action-bar span.google a:before {
+  font-family: FontAwesome;
+  content: "\f1a0";
+  margin-right: .5em;
 }
 
 form {
