@@ -3,13 +3,12 @@
   - tracker_type = tracker.type
   - if problem.issue_link.present?
     %span
-      = link_to problem.issue_link, :class => "goto-issue issue-tracker-button" do
+      = link_to problem.issue_link, :class => "goto-issue btn btn-default", target: '_blank' do
         %img.button-icon{"src" => tracker_type.icons[:goto]}
-        go to issue
-    %span
-      = link_to unlink_issue_app_problem_path(app, problem), :method => :delete, :data => { :confirm => "Unlink err issues?" }, :class => "unlink-issue issue-tracker-button" do
-        %img.button-icon{"src" => tracker_type.icons[:create]}
-        unlink issue
+        = t('.go_to_issue')
+    = link_to unlink_issue_app_problem_path(app, problem), :method => :delete, :data => { :confirm => t('.unlink_err_issues') }, :class => "unlink-issue btn btn-default" do
+      %img.button-icon{"src" => tracker_type.icons[:destroy] || tracker_type.icons[:create] }
+      = t('.unlink_issue')
     - if tracker.tracker.respond_to? :close_issue
       %span
         = link_to close_issue_app_problem_path(app, problem), method: :post, :class => "close-issue" do
@@ -17,12 +16,13 @@
           close issue
   - elsif problem.issue_link == "pending"
     %span.disabled
-      = link_to '#', :class => "create-issue issue-tracker-button" do
+      = link_to '#', :class => "create-issue btn btn-default disabled" do
         %img.button-icon{"src" => tracker_type.icons[:inactive]}
-        creating...
-    = link_to 'retry', create_issue_app_problem_path(app, problem), :method => :post
+        = t('.creating')
+    = link_to create_issue_app_problem_path(app, problem), :method => :post do
+      = t('.retry')
   - else
     %span
-      = link_to create_issue_app_problem_path(app, problem), method: :post, :class => "create-issue issue-tracker-button" do
+      = link_to create_issue_app_problem_path(app, problem), method: :post, :class => "create-issue btn btn-default" do
         %img.button-icon{"src" => tracker_type.icons[:create]}
-        create issue
+        = t('.create_issue')

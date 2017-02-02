@@ -4,15 +4,20 @@
   - content_for :title_style do
     background: url('#{gravatar}') no-repeat;
     padding-left: 106px;
+    min-height: 86px;
 
 - content_for :action_bar do
   = render 'shared/link_github_account'
   = render 'shared/link_google_account'
-  = link_to t('.edit'), edit_user_path(user), :class => 'button'
-  = link_to t('.destroy'), user_path(user), :method => :delete,
-    :data => { :confirm => t('users.confirm_delete') }, :class => 'delete button'
+  = link_to edit_user_path(user), class: 'btn btn-default' do
+    %i.fa.fa-edit
+    = t('edit')
+  = link_to user_path(user), method: :delete,
+    data: { confirm: t('users.confirm_delete') }, class: 'delete btn btn-danger' do
+    %i.fa.fa-remove
+    = t('destroy')
 
-%table.single_user
+%table.single_user.table.table-striped.table-vertical.table-bordered
   %tr
     %th= t('.email')
     %td.main= user.email
@@ -30,4 +35,3 @@
   %tr
     %th= t('.created')
     %td= user.created_at.to_s(:micro)
-

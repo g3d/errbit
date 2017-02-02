@@ -2,7 +2,7 @@
 - content_for :action_bar do
   - if current_user.admin?
     %span
-      = link_to(new_app_path) do
+      = link_to (new_app_path), class: 'btn btn-success' do
         %i.fa.fa-plus-circle
         = t('.new_app')
 
